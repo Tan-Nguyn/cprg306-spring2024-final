@@ -1,4 +1,3 @@
-// app/page.js
 "use client";
 
 import { useUserAuth } from "./_utils/auth-context";
