@@ -1,9 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useUserAuth } from "../_utils/auth-context"; // Corrected path
+import { useUserAuth } from "../_utils/auth-context";
 import Link from "next/link";
-import { db } from "../_utils/firebase"; // Corrected path
+import { db } from "../_utils/firebase";
 import { collection, addDoc, getDocs, query, where, deleteDoc, doc } from "firebase/firestore";
 
 export default function ProtectedPage() {
@@ -64,6 +64,11 @@ export default function ProtectedPage() {
               </li>
             ))}
           </ul>
+          <div>
+            <Link href="/account">Account Page</Link>
+            <br />
+            <Link href="/achievements">Achievements Page</Link>
+          </div>
         </div>
       ) : (
         <div>
