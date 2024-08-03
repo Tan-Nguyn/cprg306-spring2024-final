@@ -1,3 +1,4 @@
+// app/page.js
 "use client";
 
 import { useUserAuth } from "./_utils/auth-context";
@@ -33,7 +34,7 @@ export default function SignInPage() {
           <p>{user.email}</p>
           <img className="w-8 h-8" src={user.photoURL} alt="User profile" />
           <p>
-            <Link href="/week-8/protected/">Protected Page</Link>
+            <Link href="/protected">Protected Page</Link>
           </p>
           <button onClick={handleSignOut} className="text-lg m-2 hover:underline">
             Sign Out
