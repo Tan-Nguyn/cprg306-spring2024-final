@@ -52,58 +52,81 @@ export default function AchievementsPage() {
   };
 
   return (
-    <main className="p-4 bg-gray-900 min-h-screen text-white">
-      <header className="mb-8">
-        <h1 className="text-3xl font-bold mb-6">Achievements Page</h1>
-      </header>
-      {user ? (
-        <div>
-          <p className="mb-4">Achievements for {user.displayName}</p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {achievements.map((achievement) => (
-              <div key={achievement.id} className="flex items-center justify-between p-4 bg-gray-800 rounded-lg shadow-md">
-                <div className="flex items-center space-x-3">
-                  <FontAwesomeIcon icon={achievement.icon} className="text-yellow-500" size="2x" />
-                  <span className="text-lg font-medium">{achievement.text}</span>
+    <main className="flex min-h-screen bg-gray-900 text-white">
+      {/* Sidebar */}
+      <aside className="w-64 bg-gray-800 p-4 h-full flex-shrink-0">
+        <nav>
+          <ul className="space-y-4">
+            <li>
+              <Link href="/protected" className="block py-2 px-4 rounded-lg hover:bg-gray-700">To-Do List</Link>
+            </li>
+            <li>
+              <Link href="/account" className="block py-2 px-4 rounded-lg hover:bg-gray-700">Account Page</Link>
+            </li>
+            <li>
+              <Link href="/achievements" className="block py-2 px-4 rounded-lg hover:bg-gray-700">Achievements Page</Link>
+            </li>
+            <li>
+              <Link href="/pomodoro" className="block py-2 px-4 rounded-lg hover:bg-gray-700">Pomodoro Timer</Link>
+            </li>
+          </ul>
+        </nav>
+      </aside>
+
+      {/* Main Content */}
+      <div className="flex-1 p-4">
+        <header className="mb-8">
+          <h1 className="text-3xl font-bold mb-6">Achievements Page</h1>
+        </header>
+        {user ? (
+          <div>
+            <p className="mb-4">Achievements for {user.displayName}</p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+              {achievements.map((achievement) => (
+                <div key={achievement.id} className="flex items-center justify-between p-4 bg-gray-800 rounded-lg shadow-md">
+                  <div className="flex items-center space-x-3">
+                    <FontAwesomeIcon icon={achievement.icon} className="text-yellow-500" size="2x" />
+                    <span className="text-lg font-medium">{achievement.text}</span>
+                  </div>
+                  <button onClick={() => handleShareClick(achievement)} className="text-blue-500 hover:text-blue-400">
+                    Share
+                  </button>
                 </div>
-                <button onClick={() => handleShareClick(achievement)} className="text-blue-500 hover:text-blue-400">
-                  Share
+              ))}
+            </div>
+            <div className="mt-8">
+              <Link href="/protected" className="text-blue-500 hover:underline">Back to To-Do List</Link>
+            </div>
+          </div>
+        ) : (
+          <div>
+            <p>You must be logged in to view this page.</p>
+            <Link href="/" className="text-blue-500 hover:underline">Click here to return to the sign-in page.</Link>
+          </div>
+        )}
+
+        {showShareModal && (
+          <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-70 z-50">
+            <div className="bg-gray-900 p-6 rounded-lg shadow-lg">
+              <h2 className="text-xl mb-4">Share your achievement</h2>
+              <div className="flex space-x-4">
+                <button onClick={() => handleShare("facebook")} className="text-blue-600 hover:text-blue-500">
+                  <FaFacebook size="2em" />
+                </button>
+                <button onClick={() => handleShare("twitter")} className="text-blue-400 hover:text-blue-300">
+                  <FaTwitter size="2em" />
+                </button>
+                <button onClick={() => handleShare("instagram")} className="text-pink-600 hover:text-pink-500">
+                  <FaInstagram size="2em" />
                 </button>
               </div>
-            ))}
-          </div>
-          <div className="mt-8">
-            <Link href="/protected" className="text-blue-500 hover:underline">Back to To-Do List</Link>
-          </div>
-        </div>
-      ) : (
-        <div>
-          <p>You must be logged in to view this page.</p>
-          <Link href="/" className="text-blue-500 hover:underline">Click here to return to the sign-in page.</Link>
-        </div>
-      )}
-
-      {showShareModal && (
-        <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-70 z-50">
-          <div className="bg-gray-900 p-6 rounded-lg shadow-lg">
-            <h2 className="text-xl mb-4">Share your achievement</h2>
-            <div className="flex space-x-4">
-              <button onClick={() => handleShare("facebook")} className="text-blue-600 hover:text-blue-500">
-                <FaFacebook size="2em" />
-              </button>
-              <button onClick={() => handleShare("twitter")} className="text-blue-400 hover:text-blue-300">
-                <FaTwitter size="2em" />
-              </button>
-              <button onClick={() => handleShare("instagram")} className="text-pink-600 hover:text-pink-500">
-                <FaInstagram size="2em" />
+              <button onClick={handleCloseModal} className="mt-4 text-gray-400 hover:text-gray-300">
+                Close
               </button>
             </div>
-            <button onClick={handleCloseModal} className="mt-4 text-gray-400 hover:text-gray-300">
-              Close
-            </button>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </main>
   );
 }
