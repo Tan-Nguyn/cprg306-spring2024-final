@@ -6,7 +6,7 @@ import Link from 'next/link';
 import '../globals.css';
 
 const PomodoroPage = () => {
-  const [timeLeft, setTimeLeft] = useState(1500); // 25 minutes
+  const [timeLeft, setTimeLeft] = useState(1500);
   const [isRunning, setIsRunning] = useState(false);
   const [isBreak, setIsBreak] = useState(false);
   const [buttonLabel, setButtonLabel] = useState('Break');
@@ -19,15 +19,14 @@ const PomodoroPage = () => {
           if (prevTime <= 0) {
             clearInterval(timer);
             if (isBreak) {
-              // End of break period
               setIsBreak(false);
-              setTimeLeft(1500); // Reset to 25 minutes
-              setButtonLabel('Break'); // Change button to "Break"
+              setTimeLeft(1500);
+              setButtonLabel('Break');
             } else {
               // End of work period
               setIsBreak(true);
-              setTimeLeft(300); // 5 minutes for break
-              setButtonLabel('Reset'); // Change button to "Reset"
+              setTimeLeft(300);
+              setButtonLabel('Reset');
             }
             return 0;
           }
@@ -53,12 +52,12 @@ const PomodoroPage = () => {
     if (buttonLabel === 'Break') {
       setIsRunning(true);
       setButtonLabel('Reset');
-      setTimeLeft(300); // Set to 5 minutes for break
+      setTimeLeft(300);
       setIsBreak(true);
     } else if (buttonLabel === 'Reset') {
       setIsRunning(false);
-      setTimeLeft(1500); // Set to 25 minutes
-      setButtonLabel('Break'); // Reset button to "Break"
+      setTimeLeft(1500);
+      setButtonLabel('Break');
       setIsBreak(false);
     }
   };
